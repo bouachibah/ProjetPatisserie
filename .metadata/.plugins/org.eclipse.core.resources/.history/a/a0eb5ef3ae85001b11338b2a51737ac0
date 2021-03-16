@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{template.html}">
+	<meta charset="utf-8" />
+<head>
+<title>index</title>
+</head>
+<body>
+	<div class="container" layout:fragment="content">
+		<div class="col-md-6 ml-auto mr-auto">
+			<h1>Ajouter un nouveau produit</h1>
+			<form th:action="@{/save}" class="was-validated" method="post" enctype="multipart/form-data">
+					<label class="control-label">Id :<label th:text="${produit.id}"></label></label> <input type="hidden"
+						class="form-control" th:value="${produit.id}"
+						name="id" required>
+					<div class="valid-feedback">Valid.</div>
+					<div class="invalid-feedback"></div>
+<!-- 				<span th:errors="${produit.name}"></span> -->
+				</div> method="post">
+			
+				<div class="form-group">
+					<label for="name">Designation:</label> <input type="text"
+						class="form-control" id="name"  th:value="${produit.name}"
+						name="name" required>
+					<div class="valid-feedback">Valid.</div>
+					<div class="invalid-feedback"></div>
+<!-- 				<span th:errors="${produit.name}"></span> -->
+				</div>
+				<div class="form-group">
+					<label for="prices">Prix:</label> <input type="text"
+						class="form-control" placeholder="prix" name="price"th:value="${produit.price}"
+						required>
+					<div class="valid-feedback">Valid.</div>
+					<div class="invalid-feedback">Please fill out this field.</div>
+				</div>
+				<div class="form-group">
+					<label for="content">Contenu:</label> <input type="text"
+						class="form-control" th:value="${produit.content}"
+						name="content" required>
+					<div class="valid-feedback">Valid.</div>
+					<div class="invalid-feedback">Please fill out this field.</div>
+					
+				</div>
+				<div class="form-group">
+					<label for="exampleFormControlFile1"></label> <input
+						type="file" class="form-control-file" name="picture">
+						<img class="rounded-circle"  th:src="@{getPhoto(id=${produit.id})}" width="300px" height="300px" />
+					
+				</div>
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</form>
+		</div>
+	</div>
+
+</body>
+</html>

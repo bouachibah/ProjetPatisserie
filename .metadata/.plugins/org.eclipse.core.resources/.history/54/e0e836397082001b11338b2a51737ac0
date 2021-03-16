@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{template.html}">
+<head>
+<title>index</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<h1>Les Recettes de Patisserie</h1>
+		<p>Les meilleures recettes de patisserie avec photos pour trouver
+			une recette de patisserie facile, rapide et délicieuse. 6090 recettes
+			de patisserie à découvrir sur Recettes de Cuisine. Cliquez sur la
+			photo ou le titre d'une recette de patisserie pour la lire sur le
+			blog de son auteur.</p>
+	</div>
+
+</body>
+</html>

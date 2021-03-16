@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="template.html">
+<head>
+<meta charset="utf-8">
+<title>Product</title>
+</head>
+<body>
+	<div layout:fragment="content" class="spacer">
+		<h1>Nos produits</h1>
+		<div class="container">
+			<form th:action="@{product}" method="get">
+				<label>Mot clé :</label> <input type="text" name="motCle" th:value="${motCle}">
+				<button class="btn btn-primary">Chercher</button>
+			</form>
+		</div>
+		<table class="table table-bordered table-sm table-striped spacer ">
+			<tbody>
+				<tr th:each="produit : ${products}">
+					<td>
+					<img class="rounded-circle"  th:src="@{getPhoto(id=${produit.id})}" width="300px" height="300px" />
+					<!--<td th:text="${produit.id}"></td>-->
+					</td><td>
+					<h4 th:text="${produit.name}"></h4>
+					<h4 th:text="${produit.price}"></h4>
+					<h4 th:text="${produit.content}"></h4>				   
+					<a class="material-icons" onclick="return confirm('etes vous sûre de vouloir supprimer')"  th:href="@{/delete(id=${produit.id},page=${pageCourante},motCle=${motCle})}">
+					&#xe872;</a>
+					
+					
+					<a  th:href="@{/edit(id=${produit.id})}" style='font-size:16px' class='far'>&#xf044;</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div>
+
+
+			<ul class="pagination pagination-lg">
+				<li
+					th:class="${pageCourante}==${status.index}?'page-item active':''"
+					th:each="pa,status:${pages}"><a class="page-link"
+					th:href="@{product(page=${status.index},motCle=${motCle})}"
+					th:text="${status.index}"></a></li>
+
+			</ul>
+		</div>
+	</div>
+
+
+</body>
+</html>

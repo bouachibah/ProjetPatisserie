@@ -1,0 +1,80 @@
+package com.id.controller;
+import java.io.File;
+import java.io.IOException;
+
+import javax.websocket.server.PathParam;
+
+import org.apache.commons.codec.language.bm.Rule.RPattern;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.id.dao.ProductRepository;
+import com.id.entities.Product;
+
+@Controller
+public class ProductController {
+
+	@Autowired
+	private ProductRepository pr;
+	@GetMapping("/")
+	  public String index() {
+		 
+		  return "index";
+	  }
+	@GetMapping("/product")
+	  public String index(Model model,
+			  @RequestParam(name="page",defaultValue = "0")int p,
+			   @RequestParam(name="size",defaultValue = "5")int s,
+			   @RequestParam(name="motCle",defaultValue="")String mc) {
+		Pageable paging = PageRequest.of(p,s);
+		Page<Product>pageProducts=pr.chercher("%"+mc+"%",paging);
+		 model.addAttribute("products",pageProducts.getContent());
+		 int[]pages=new int[pageProducts.getTotalPages()];
+		 model.addAttribute("pages",pages);
+		 model.addAttribute("pageCourante",p);
+		 model.addAttribute("motCle",mc);
+		  return "products";
+	  }
+	@GetMapping("/delete")
+	public String delete(Long id,int page,String motCle){
+		pr.deleteById(id);
+		return "redirect:/product?page="+page+"&motCle="+motCle;
+		
+	}
+	@GetMapping("/formProduit")
+	public String form(Model model){
+		model.addAttribute("produit",new Product());
+		return "formProduit";
+		
+	}
+	@PostMapping("/save")
+	public String form(Model model,@Validated Product produit,
+			BindingResult bindingResult,@RequestParam(name="photo")MultipartFile file) throws IllegalStateException, IOException{
+		if(bindingResult.hasErrors())return "formProduit";
+		if(!(file.isEmpty())) {
+			produit.setPhoto(file.getOriginalFilename());
+			file.transferTo(new File(System.getProperty("Users/moust/imageSpring")));
+		}
+		pr.save(produit);
+		return "redirect:/product";
+		
+	}
+	@GetMapping("/edit")
+	public String edit(Model model, Long id){
+		Product produit=pr.findById(id).get();
+		model.addAttribute("produit",produit);
+		return "editProduit";
+		
+	}
+	
+}

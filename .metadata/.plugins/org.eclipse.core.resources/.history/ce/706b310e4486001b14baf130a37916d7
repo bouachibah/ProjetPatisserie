@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="template.html">
+<head>
+<meta charset="utf-8">
+<title>Product</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="container">
+			<section id="menu">
+				<section>
+					<ul class="actions stacked">
+						<li><a href="#" class="button large fit">Log Inlkkkkk</a></li>
+					</ul>
+				</section>
+			</section>
+			<!-- Main -->
+			<div id="main">
+				<article class="post" th:each="produit : ${products}">
+					<header>
+						<div class="title">
+							<h2 th:text="${produit.name}"></h2>
+							<p th:text="${produit.content}"></p>
+						</div>
+						<div class="meta">
+							<p th:text="${produit.price}"></p>
+						</div>
+					</header>
+					<img class="rounded-circle" th:src="@{getPhoto(id=${produit.id})}"
+						width="400px" height="300px" />
+
+					<footer>
+						<ul class="actions">
+							<li><a th:href="@{/edit(id=${produit.id})}"
+								style='font-size: 16px' class='far'>&#xf044;</a> <a
+								class="material-icons"
+								onclick="return confirm('etes vous sûre de vouloir supprimer')"
+								th:href="@{/delete(id=${produit.id},page=${pageCourante},motCle=${motCle})}">
+									&#xe872;</a></li>
+						</ul>
+						<ul class="stats">
+							<li><a href="#">General</a></li>
+							<li><a href="#" class="icon solid fa-heart">28</a></li>
+							<li><a href="#" class="icon solid fa-comment">128</a></li>
+						</ul>
+					</footer>
+				</article>
+				<div>
+				      <ul class="pagination pagination-lg">
+						<li
+							th:class="${pageCourante}==${status.index}?'page-item active':''"
+							th:each="pa,status:${pages}"><a class="page-link"
+							th:href="@{product(page=${status.index},motCle=${motCle})}"
+							th:text="${status.index}"></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- Scripts -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+	</div>
+</body>
+</html>

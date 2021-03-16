@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="template.html">
+<head>
+<meta charset="utf-8">
+<title>Product</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>id</th>
+					<th>Name</th>
+					<th>Prix</th>
+					<th>content</th>
+				</tr/>
+			</thead>
+			<tbody>
+				<tr th:each="produit : ${products}">
+					<td th:text="${produit.id}"></td>
+					<td th:text="${produit.name}"></td>
+					<td th:text="${produit.price}"></td>
+					<td th:text="${produit.content}"></td>
+				</tr>
+			</tbody>
+		</table>
+		<div>
+	   <ul  class="pagination">
+	   <li th:each="pa,status:${pages}">
+	    <a th:href="@{product(page=${status.index})}" th:text="${status.index}"></a>
+	   </li>
+	  </ul>	
+	</div>
+	</div>
+	
+	
+</body>
+</html>

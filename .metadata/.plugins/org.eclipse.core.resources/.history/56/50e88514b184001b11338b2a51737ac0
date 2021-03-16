@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="utf-8" />
+<title>Insert title here</title>
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+ <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <div layout:fragment="content">
+		<h1>Les Recettes de Patisserie</h1>
+		<p>Les meilleures recettes de patisserie avec photos pour trouver
+			une recette de patisserie facile, rapide et délicieuse. 6090 recettes
+			de patisserie à découvrir sur Recettes de Cuisine. Cliquez sur la
+			photo ou le titre d'une recette de patisserie pour la lire sur le
+			blog de son auteur.</p>
+	</div>
+  
+</body>
+</html>
+

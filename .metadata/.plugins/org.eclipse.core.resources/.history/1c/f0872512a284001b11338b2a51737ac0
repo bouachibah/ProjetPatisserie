@@ -1,0 +1,7 @@
+server.port=8082
+keycloak.realm=patisserie
+keycloak.auth-server-url=http://localhost:8080/auth/
+keycloak.resource=patisserie
+keycloak.public-client=true
+keycloak.principal-attribute=name
+spring.thymeleaf.cache=false
