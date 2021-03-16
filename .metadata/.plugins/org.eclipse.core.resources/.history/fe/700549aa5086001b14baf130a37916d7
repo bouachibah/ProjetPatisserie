@@ -51,7 +51,7 @@
 							class="dropdown-item" href="changePassword">Change password</a>
 					</div></li>
 				<li class="nav-item" sec:authorize="isAnonymous()"><a
-					href="/sso/login" class="nav-link">Se connecter</a></li>
+					href="/sso/login" class="nav-link">se connecter</a></li>
 			</ul>
 		</nav>
 		</header>
